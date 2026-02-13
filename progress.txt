@@ -5,6 +5,7 @@
 - Use `npm run typecheck` to verify TypeScript compilation
 - Folder structure: src/components, src/lib, src/types
 - PRD types (Feature, UserStory, PRD) exported from src/types/prd.ts
+- API routes go in src/app/api/<endpoint>/route.ts
 
 ---
 
@@ -42,5 +43,18 @@
   - PRD types are in src/types/prd.ts - import from there for type safety
   - TokenUsage is optional on UserStory (only tracked for completed stories)
   - startedAt, completedAt, durationSeconds, notes are all optional on UserStory
+---
+
+## 2026-02-13T17:42:00Z - US-003
+- Created API route to read prd.json at `/api/prd`
+- GET endpoint returns parsed JSON with 200 status
+- Handles error cases: 404 for missing file, 400 for invalid JSON, 500 for other errors
+- Files created:
+  - src/app/api/prd/route.ts (API route handler)
+- **Learnings for future iterations:**
+  - Next.js App Router API routes use route.ts files in the api directory
+  - Use process.cwd() to get the project root path
+  - Check error.code === "ENOENT" for file-not-found errors in Node.js fs operations
+  - Import PRD type from @/types/prd for type safety in API responses
 ---
 

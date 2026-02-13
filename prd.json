@@ -50,7 +50,14 @@
           "startedAt": "2026-02-13T17:40:00Z",
           "completedAt": "2026-02-13T17:42:00Z",
           "durationSeconds": 120,
-          "notes": ""
+          "notes": "",
+          "tokenUsage": {
+            "input": 2,
+            "output": 4103,
+            "cacheRead": 507192,
+            "cacheCreate": 16142,
+            "turns": 20
+          }
         },
         {
           "id": "US-003",
@@ -64,7 +71,10 @@
             "Typecheck passes"
           ],
           "priority": 3,
-          "passes": false,
+          "passes": true,
+          "startedAt": "2026-02-13T17:41:00Z",
+          "completedAt": "2026-02-13T17:42:00Z",
+          "durationSeconds": 60,
           "notes": ""
         }
       ]
