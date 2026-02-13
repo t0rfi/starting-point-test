@@ -11,6 +11,7 @@
 - formatDuration(seconds) utility for human-readable time display (e.g., '2h 15m')
 - React components go in src/components/<ComponentName>.tsx
 - Story status: getStoryStatus(story) from StoryCard.tsx returns 'backlog' | 'in-progress' | 'done'
+- KanbanColumn accepts status and stories[] props, renders StoryCard list with header
 
 ---
 
@@ -112,5 +113,21 @@
   - Use line-clamp-N Tailwind classes for text truncation
   - Export StoryStatus type and getStoryStatus helper for reuse by other components (e.g., Kanban columns)
   - Use transition-colors for subtle hover/focus effects
+---
+
+## 2026-02-13T21:19:00Z - US-007
+- Created KanbanColumn component for grouping stories by status
+- Column displays header with status name and story count (e.g., 'Backlog (5)')
+- Renders list of StoryCard components for each story
+- Supports three statuses: backlog, in-progress, done with color-coded headers
+- Empty state shown when no stories in column (dashed border placeholder)
+- Columns are scrollable (overflow-y-auto) with min-width for horizontal layout
+- Files created:
+  - src/components/KanbanColumn.tsx (Kanban column UI component)
+- **Learnings for future iterations:**
+  - Import StoryStatus type and StoryCard from StoryCard.tsx for reuse
+  - Use flex-1 with min-w for responsive column widths
+  - Use space-y-3 for consistent card spacing in columns
+  - Column config object pattern for status-based styling (headerBg, headerText)
 ---
 
