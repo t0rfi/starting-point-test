@@ -186,3 +186,19 @@
   - POLL_INTERVAL_MS constant at top of file for easy adjustment
 ---
 
+## 2026-02-13T18:27:00Z - US-011
+- Created ListView component with expandable feature sections
+- FeatureSection sub-component with collapsible UI (chevron icon rotation)
+- StoryRow sub-component displays ID, title, status indicator, time spent
+- Progress bar in each section header showing X of Y completion
+- Status color indicators: gray (backlog), blue (in-progress), green (done)
+- Sections default to expanded, state managed via useState Set
+- Files created:
+  - src/components/ListView.tsx (list view UI component)
+- **Learnings for future iterations:**
+  - Use Set<string> for managing multiple expanded/collapsed states efficiently
+  - Re-use getStoryStatus and formatDuration from existing components/utilities
+  - Button with onClick for expandable sections (better accessibility than div)
+  - Use truncate class for long titles, show full on hover or expansion
+---
+
