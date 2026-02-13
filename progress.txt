@@ -4,6 +4,7 @@
 - TypeScript 5 with strict mode
 - Use `npm run typecheck` to verify TypeScript compilation
 - Folder structure: src/components, src/lib, src/types
+- PRD types (Feature, UserStory, PRD) exported from src/types/prd.ts
 
 ---
 
@@ -28,5 +29,18 @@
   - Next.js 16 uses Turbopack by default for faster dev builds
   - Tailwind v4 uses @tailwindcss/postcss instead of tailwindcss/postcss
   - create-next-app requires empty directory; use temp directory workaround for existing repos
+---
+
+## 2026-02-13T17:42:00Z - US-002
+- Defined TypeScript types for PRD data structure
+- Created types for UserStory, Feature, PRD root, and TokenUsage
+- All types exported from central types file (src/types/prd.ts)
+- Types include JSDoc comments for documentation
+- Files created:
+  - src/types/prd.ts (PRD type definitions)
+- **Learnings for future iterations:**
+  - PRD types are in src/types/prd.ts - import from there for type safety
+  - TokenUsage is optional on UserStory (only tracked for completed stories)
+  - startedAt, completedAt, durationSeconds, notes are all optional on UserStory
 ---
 
