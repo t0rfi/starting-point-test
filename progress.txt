@@ -9,6 +9,7 @@
 - Vitest for unit testing: `npm run test` to run, `npm run test:watch` for watch mode
 - Utility functions go in src/lib/<name>.ts with tests in src/lib/__tests__/<name>.test.ts
 - formatDuration(seconds) utility for human-readable time display (e.g., '2h 15m')
+- React components go in src/components/<ComponentName>.tsx
 
 ---
 
@@ -78,5 +79,20 @@
   - Put tests in __tests__ subdirectory next to source files
   - Use vitest.config.ts for path alias configuration matching tsconfig
   - formatDuration returns '-' for null/undefined (not empty string) for better UX
+---
+
+## 2026-02-13T17:52:16Z - US-005
+- Created EmptyState component for when prd.json is missing or empty
+- Component displays informative message with file icon
+- Shows expected file location (./prd.json) in styled code block
+- Styled with neutral colors (zinc palette) for light/dark mode support
+- Centered layout with responsive design
+- Files created:
+  - src/components/EmptyState.tsx (empty state UI component)
+- **Learnings for future iterations:**
+  - React components go in src/components directory
+  - Use zinc color palette for neutral UI elements
+  - Support dark mode with dark: variants in Tailwind classes
+  - EmptyState accepts optional title and message props for flexibility
 ---
 
