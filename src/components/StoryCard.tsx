@@ -50,12 +50,12 @@ export function StoryCard({ story }: StoryCardProps) {
 
   return (
     <div
-      className={`rounded-lg border p-3 sm:p-4 ${config.bg} ${config.border} transition-colors`}
+      className={`min-h-[88px] touch-manipulation rounded-lg border p-3 active:scale-[0.98] sm:min-h-0 sm:p-4 sm:active:scale-100 ${config.bg} ${config.border} transition-all`}
     >
       <div className="mb-2 flex items-start justify-between gap-2">
         <div className="flex items-center gap-2">
           <span
-            className={`h-2 w-2 flex-shrink-0 rounded-full ${config.indicator}`}
+            className={`h-2.5 w-2.5 flex-shrink-0 rounded-full sm:h-2 sm:w-2 ${config.indicator}`}
             title={config.label}
           />
           <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
@@ -68,10 +68,10 @@ export function StoryCard({ story }: StoryCardProps) {
           </span>
         )}
       </div>
-      <h3 className="mb-2 text-sm font-semibold leading-tight text-zinc-900 dark:text-zinc-100 sm:text-base">
+      <h3 className="mb-2 text-sm font-semibold leading-snug text-zinc-900 dark:text-zinc-100 sm:text-base sm:leading-tight">
         {story.title}
       </h3>
-      <p className="line-clamp-2 text-xs text-zinc-600 dark:text-zinc-400 sm:text-sm">
+      <p className="line-clamp-2 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-sm sm:leading-normal">
         {story.description}
       </p>
     </div>

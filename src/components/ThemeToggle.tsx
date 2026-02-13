@@ -69,7 +69,7 @@ export function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="rounded-lg p-2 text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
+        className="min-h-[36px] min-w-[36px] touch-manipulation rounded-lg p-2 text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800 sm:min-h-0 sm:min-w-0"
         aria-label="Toggle theme"
       >
         <span className="h-5 w-5 block" />
@@ -80,7 +80,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="rounded-lg p-2 text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800 transition-colors"
+      className="min-h-[36px] min-w-[36px] touch-manipulation rounded-lg p-2 text-zinc-600 transition-colors active:scale-95 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800 sm:min-h-0 sm:min-w-0 sm:active:scale-100"
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
     >
       {theme === "dark" ? (

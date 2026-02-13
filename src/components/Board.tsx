@@ -166,7 +166,7 @@ export function Board() {
           }`}
         >
           {viewMode === "board" && (
-            <div className="flex gap-4 overflow-x-auto pb-4 sm:gap-6">
+            <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-4 sm:-mx-0 sm:snap-none sm:gap-6 sm:px-0">
               {STATUSES.map((status) => {
                 const config = columnConfig[status];
                 const storyCount = getStoryCountByStatus(prd, status);
@@ -174,7 +174,7 @@ export function Board() {
                 return (
                   <div
                     key={status}
-                    className="flex min-w-[280px] flex-1 flex-col sm:min-w-[320px]"
+                    className="flex w-[85vw] flex-shrink-0 snap-center flex-col sm:w-auto sm:min-w-[320px] sm:flex-1 sm:snap-align-none"
                   >
                     <div
                       className={`mb-3 rounded-lg px-3 py-2 ${config.headerBg}`}
