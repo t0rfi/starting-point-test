@@ -345,7 +345,14 @@
           "startedAt": "2026-02-13T18:30:00Z",
           "completedAt": "2026-02-13T18:35:00Z",
           "durationSeconds": 300,
-          "notes": ""
+          "notes": "",
+          "tokenUsage": {
+            "input": 2,
+            "output": 8854,
+            "cacheRead": 883073,
+            "cacheCreate": 30870,
+            "turns": 32
+          }
         }
       ]
     },
@@ -370,7 +377,10 @@
             "Verify in browser using dev-browser skill"
           ],
           "priority": 1,
-          "passes": false,
+          "passes": true,
+          "startedAt": "2026-02-13T18:23:30Z",
+          "completedAt": "2026-02-13T18:24:49Z",
+          "durationSeconds": 79,
           "notes": ""
         },
         {

@@ -16,6 +16,9 @@
 - FeatureGroupList: renders all features' stories for a given status column
 - KanbanBoard: main client component at `/` that fetches PRD and renders full board
 - Client components need "use client" directive for React hooks (useState, useEffect)
+- Tailwind CSS v4 dark mode: use @custom-variant dark (&:where(.dark, .dark *)) in globals.css
+- Theme toggle: apply 'dark' class to document.documentElement for class-based dark mode
+- Local storage keys: 'kanban-tracker-view' for view mode, 'kanban-tracker-theme' for theme
 
 ---
 
@@ -220,5 +223,26 @@
   - Use transition-opacity with absolute positioning for smooth view transitions
   - KanbanBoard.tsx still exists but Board.tsx is now the main component
   - ViewMode type ('board' | 'list') exported from ViewToggle.tsx
+---
+
+## 2026-02-13T18:24:49Z - US-013
+- Implemented light/dark mode toggle with sun/moon icons
+- ThemeToggle component manages theme state and persists to localStorage
+- Theme preference saved with key 'kanban-tracker-theme'
+- Respects system preference on first load (via prefers-color-scheme)
+- Listens for system preference changes when no manual selection exists
+- Configured Tailwind CSS v4 dark mode via @custom-variant directive
+- Updated CSS variables for dark mode background (#0d1117)
+- Files created:
+  - src/components/ThemeToggle.tsx (theme toggle button component)
+- Files modified:
+  - src/app/globals.css (dark mode configuration)
+  - src/components/Board.tsx (added ThemeToggle to header)
+- **Learnings for future iterations:**
+  - Tailwind CSS v4 uses @custom-variant for dark mode class selector
+  - Use :root.dark for CSS variable overrides in dark mode
+  - Render placeholder button until mounted to avoid hydration mismatch
+  - Theme type ('light' | 'dark') exported from ThemeToggle.tsx
+  - ThemeToggle applies 'dark' class to document.documentElement
 ---
 
