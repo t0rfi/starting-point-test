@@ -12,6 +12,8 @@
 - React components go in src/components/<ComponentName>.tsx
 - Story status: getStoryStatus(story) from StoryCard.tsx returns 'backlog' | 'in-progress' | 'done'
 - KanbanColumn accepts status and stories[] props, renders StoryCard list with header
+- FeatureGroup: groups stories by feature with progress bar, takes (feature, status) props
+- FeatureGroupList: renders all features' stories for a given status column
 
 ---
 
@@ -129,5 +131,21 @@
   - Use flex-1 with min-w for responsive column widths
   - Use space-y-3 for consistent card spacing in columns
   - Column config object pattern for status-based styling (headerBg, headerText)
+---
+
+## 2026-02-13T21:22:00Z - US-008
+- Created FeatureGroup component with progress bar for feature-level tracking
+- Component shows feature name header with "X of Y" completion count
+- Progress bar displays percentage complete with green fill
+- FeatureGroup filters stories by status for Kanban column integration
+- Created FeatureGroupList helper component for rendering multiple features per column
+- Returns null if no stories match the given status (clean empty state)
+- Files created:
+  - src/components/FeatureGroup.tsx (feature group UI component with progress bar)
+- **Learnings for future iterations:**
+  - FeatureGroup takes feature + status props to filter stories for that column
+  - Use FeatureGroupList to render all features in a single column
+  - Progress bar uses width percentage via inline style for smooth animation
+  - Component returns null when no stories match status (avoids empty containers)
 ---
 

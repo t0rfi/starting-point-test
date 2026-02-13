@@ -196,7 +196,14 @@
           "startedAt": "2026-02-13T21:17:00Z",
           "completedAt": "2026-02-13T21:19:00Z",
           "durationSeconds": 120,
-          "notes": ""
+          "notes": "",
+          "tokenUsage": {
+            "input": 2,
+            "output": 6152,
+            "cacheRead": 927065,
+            "cacheCreate": 24790,
+            "turns": 32
+          }
         },
         {
           "id": "US-008",
@@ -212,7 +219,10 @@
             "Verify in browser using dev-browser skill"
           ],
           "priority": 2,
-          "passes": false,
+          "passes": true,
+          "startedAt": "2026-02-13T21:20:00Z",
+          "completedAt": "2026-02-13T21:22:00Z",
+          "durationSeconds": 120,
           "notes": ""
         }
       ]
