@@ -1,0 +1,156 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { PRD } from "@/types/prd";
+import { StoryStatus } from "./StoryCard";
+import { FeatureGroupList } from "./FeatureGroup";
+import { EmptyState } from "./EmptyState";
+
+const STATUSES: StoryStatus[] = ["backlog", "in-progress", "done"];
+
+const columnConfig: Record<
+  StoryStatus,
+  { title: string; headerBg: string; headerText: string }
+> = {
+  backlog: {
+    title: "Backlog",
+    headerBg: "bg-zinc-100 dark:bg-zinc-800",
+    headerText: "text-zinc-700 dark:text-zinc-300",
+  },
+  "in-progress": {
+    title: "In Progress",
+    headerBg: "bg-blue-100 dark:bg-blue-900/30",
+    headerText: "text-blue-700 dark:text-blue-300",
+  },
+  done: {
+    title: "Done",
+    headerBg: "bg-green-100 dark:bg-green-900/30",
+    headerText: "text-green-700 dark:text-green-300",
+  },
+};
+
+function getStoryCountByStatus(
+  prd: PRD,
+  status: StoryStatus
+): number {
+  let count = 0;
+  for (const feature of prd.features) {
+    for (const story of feature.userStories) {
+      const storyStatus = story.passes
+        ? "done"
+        : story.startedAt
+          ? "in-progress"
+          : "backlog";
+      if (storyStatus === status) {
+        count++;
+      }
+    }
+  }
+  return count;
+}
+
+export function KanbanBoard() {
+  const [prd, setPrd] = useState<PRD | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchPrd() {
+      try {
+        const response = await fetch("/api/prd");
+        if (!response.ok) {
+          if (response.status === 404) {
+            setError("not-found");
+          } else {
+            setError("fetch-error");
+          }
+          return;
+        }
+        const data: PRD = await response.json();
+        setPrd(data);
+      } catch {
+        setError("fetch-error");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchPrd();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-zinc-500 dark:text-zinc-400">Loading...</div>
+      </div>
+    );
+  }
+
+  if (error === "not-found" || !prd) {
+    return <EmptyState />;
+  }
+
+  if (error === "fetch-error") {
+    return (
+      <EmptyState
+        title="Error Loading PRD"
+        message="There was a problem loading the prd.json file. Please check the console for details."
+      />
+    );
+  }
+
+  if (prd.features.length === 0) {
+    return (
+      <EmptyState
+        title="No Features Found"
+        message="The prd.json file exists but contains no features. Add some features to get started."
+      />
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900">
+      <div className="p-4 sm:p-6 lg:p-8">
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+            {prd.project}
+          </h1>
+          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+            {prd.description}
+          </p>
+        </div>
+
+        <div className="flex gap-4 overflow-x-auto pb-4 sm:gap-6">
+          {STATUSES.map((status) => {
+            const config = columnConfig[status];
+            const storyCount = getStoryCountByStatus(prd, status);
+
+            return (
+              <div
+                key={status}
+                className="flex min-w-[280px] flex-1 flex-col sm:min-w-[320px]"
+              >
+                <div className={`mb-3 rounded-lg px-3 py-2 ${config.headerBg}`}>
+                  <h2 className={`text-sm font-semibold ${config.headerText}`}>
+                    {config.title}{" "}
+                    <span className="font-normal opacity-75">
+                      ({storyCount})
+                    </span>
+                  </h2>
+                </div>
+                <div className="flex-1 overflow-y-auto pr-1">
+                  <FeatureGroupList features={prd.features} status={status} />
+                  {storyCount === 0 && (
+                    <div className="rounded-lg border border-dashed border-zinc-200 p-4 text-center text-sm text-zinc-400 dark:border-zinc-700 dark:text-zinc-500">
+                      No stories
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
