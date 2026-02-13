@@ -246,3 +246,21 @@
   - ThemeToggle applies 'dark' class to document.documentElement
 ---
 
+## 2026-02-13T18:27:30Z - US-014
+- Created PageHeader component with sticky positioning and project info
+- Header shows project name from prd.json
+- Displays overall progress (X of Y stories complete) with progress bar and percentage
+- Includes ViewToggle and ThemeToggle controls
+- Sticky positioning with backdrop blur for visual appeal while scrolling
+- Responsive layout: controls stack below title on mobile, inline on larger screens
+- Files created:
+  - src/components/PageHeader.tsx (page header component)
+- Files modified:
+  - src/components/Board.tsx (now uses PageHeader instead of inline header)
+- **Learnings for future iterations:**
+  - Use sticky positioning with z-10 for fixed headers that stay above content
+  - backdrop-blur-sm with semi-transparent bg gives modern glass effect
+  - getOverallProgress helper calculates story completion across all features
+  - PageHeader accepts prd, viewMode, and onViewChange props
+---
+

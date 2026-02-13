@@ -6,8 +6,8 @@ import { StoryStatus } from "./StoryCard";
 import { FeatureGroupList } from "./FeatureGroup";
 import { EmptyState } from "./EmptyState";
 import { ListView } from "./ListView";
-import { ViewToggle, ViewMode } from "./ViewToggle";
-import { ThemeToggle } from "./ThemeToggle";
+import { ViewMode } from "./ViewToggle";
+import { PageHeader } from "./PageHeader";
 
 /** Polling interval in milliseconds - can be adjusted as needed */
 const POLL_INTERVAL_MS = 30000;
@@ -153,22 +153,13 @@ export function Board() {
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900">
-      <div className="p-4 sm:p-6 lg:p-8">
-        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-              {prd.project}
-            </h1>
-            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-              {prd.description}
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <ViewToggle currentView={viewMode} onViewChange={handleViewChange} />
-            <ThemeToggle />
-          </div>
-        </div>
+      <PageHeader
+        prd={prd}
+        viewMode={viewMode}
+        onViewChange={handleViewChange}
+      />
 
+      <div className="p-4 sm:p-6 lg:p-8">
         <div
           className={`transition-opacity duration-200 ${
             viewMode === "board" ? "opacity-100" : "opacity-0 absolute pointer-events-none"
