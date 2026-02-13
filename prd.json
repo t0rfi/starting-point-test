@@ -1,0 +1,304 @@
+{
+  "project": "Kanban Tracker",
+  "description": "A minimal Kanban board for personal productivity tracking that reads from prd.json to display features and user stories in a Linear-inspired interface",
+  "features": [
+    {
+      "id": "F-001",
+      "name": "Project Setup",
+      "branchName": "ralph/kanban-tracker/project-setup",
+      "dependsOn": null,
+      "userStories": [
+        {
+          "id": "US-001",
+          "title": "Initialize Next.js project with TypeScript and Tailwind",
+          "description": "As a developer, I need to set up the project foundation so I can build the application with the chosen tech stack.",
+          "acceptanceCriteria": [
+            "Next.js 14+ project initialized with TypeScript",
+            "Tailwind CSS configured and working",
+            "Basic folder structure created (components, lib, types)",
+            "Project runs with `npm run dev`",
+            "Typecheck passes (`npm run typecheck` or `npx tsc --noEmit`)"
+          ],
+          "priority": 1,
+          "passes": true,
+          "startedAt": "2026-02-13T17:33:00Z",
+          "completedAt": "2026-02-13T17:37:00Z",
+          "durationSeconds": 240,
+          "notes": ""
+        },
+        {
+          "id": "US-002",
+          "title": "Define TypeScript types for PRD data structure",
+          "description": "As a developer, I need TypeScript types that match the prd.json schema so I have type safety throughout the app.",
+          "acceptanceCriteria": [
+            "Types defined for Feature, UserStory, and PRD root",
+            "UserStory includes: id, title, description, acceptanceCriteria, priority, passes, startedAt, completedAt, durationSeconds, notes",
+            "Feature includes: id, name, branchName, dependsOn, userStories array",
+            "PRD root includes: project, description, features array",
+            "Types exported from a central types file (types/prd.ts)",
+            "Typecheck passes"
+          ],
+          "priority": 2,
+          "passes": false,
+          "notes": ""
+        },
+        {
+          "id": "US-003",
+          "title": "Create API route to read prd.json",
+          "description": "As a developer, I need an API endpoint that reads and returns the prd.json data so the frontend can fetch it.",
+          "acceptanceCriteria": [
+            "GET `/api/prd` endpoint returns parsed prd.json contents",
+            "Reads from fixed path `./prd.json` in project root",
+            "Returns 200 with JSON data when file exists and is valid",
+            "Returns appropriate error response when file is missing or invalid",
+            "Typecheck passes"
+          ],
+          "priority": 3,
+          "passes": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "F-002",
+      "name": "Core Utilities and Components",
+      "branchName": "ralph/kanban-tracker/core-components",
+      "dependsOn": "F-001",
+      "userStories": [
+        {
+          "id": "US-004",
+          "title": "Create utility for human-readable time formatting",
+          "description": "As a developer, I need a utility function to convert seconds into human-readable time so it's displayed consistently throughout the app.",
+          "acceptanceCriteria": [
+            "Function takes durationSeconds (number) as input",
+            "Returns formatted string (e.g., '2h 15m', '45m', '1h')",
+            "Handles edge cases: 0 seconds, null/undefined, very large numbers",
+            "Unit tests cover various inputs",
+            "Typecheck passes"
+          ],
+          "priority": 1,
+          "passes": false,
+          "notes": ""
+        },
+        {
+          "id": "US-005",
+          "title": "Create empty state component",
+          "description": "As a user, I want to see helpful instructions when prd.json is missing or empty so I know how to get started.",
+          "acceptanceCriteria": [
+            "Empty state component displays when no prd.json exists",
+            "Shows clear message explaining the file is missing",
+            "Includes brief instructions on expected file location",
+            "Styled consistently with app theme (neutral colors, centered layout)",
+            "Typecheck passes",
+            "Verify in browser using dev-browser skill"
+          ],
+          "priority": 2,
+          "passes": false,
+          "notes": ""
+        },
+        {
+          "id": "US-006",
+          "title": "Create story card component",
+          "description": "As a user, I want to see story information displayed on cards so I can quickly understand each story's details.",
+          "acceptanceCriteria": [
+            "Card displays story ID and title prominently",
+            "Card shows story description (truncated if long)",
+            "Card shows time spent in human-readable format (e.g., '2h 15m') for completed stories using the time formatting utility",
+            "Card has visual indicator for status (color-coded: gray for backlog, blue for in-progress, green for done)",
+            "Card is responsive and works on mobile",
+            "Typecheck passes",
+            "Verify in browser using dev-browser skill"
+          ],
+          "priority": 3,
+          "passes": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "F-003",
+      "name": "Board Structure",
+      "branchName": "ralph/kanban-tracker/board-structure",
+      "dependsOn": "F-002",
+      "userStories": [
+        {
+          "id": "US-007",
+          "title": "Create Kanban column component",
+          "description": "As a user, I want stories grouped into columns by status so I can see the workflow at a glance.",
+          "acceptanceCriteria": [
+            "Column component displays header with status name",
+            "Column shows count of stories (e.g., 'Backlog (5)')",
+            "Column renders list of story cards",
+            "Three columns supported: Backlog, In Progress, Done",
+            "Columns are scrollable when content overflows",
+            "Typecheck passes",
+            "Verify in browser using dev-browser skill"
+          ],
+          "priority": 1,
+          "passes": false,
+          "notes": ""
+        },
+        {
+          "id": "US-008",
+          "title": "Create feature group component with progress bar",
+          "description": "As a user, I want to see features grouped with their stories and a progress bar so I can track completion at the feature level.",
+          "acceptanceCriteria": [
+            "Feature header shows feature name",
+            "Progress bar shows completion ratio (e.g., 3 of 5 stories)",
+            "Progress bar visually indicates percentage complete with colored fill",
+            "Feature groups its stories within the Kanban columns",
+            "Works with multiple features on the same board",
+            "Typecheck passes",
+            "Verify in browser using dev-browser skill"
+          ],
+          "priority": 2,
+          "passes": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "F-004",
+      "name": "Main Board View",
+      "branchName": "ralph/kanban-tracker/main-board",
+      "dependsOn": "F-003",
+      "userStories": [
+        {
+          "id": "US-009",
+          "title": "Build main Kanban board page",
+          "description": "As a user, I want to see all features and stories in a Kanban board layout so I can visualize my project progress.",
+          "acceptanceCriteria": [
+            "Board page fetches data from `/api/prd`",
+            "Displays all features grouped on the board",
+            "Shows three status columns with stories distributed correctly based on passes field (passes=false && no startedAt = backlog, passes=false && startedAt = in-progress, passes=true = done)",
+            "Shows empty state when no data available",
+            "Page is the default route (`/`)",
+            "Typecheck passes",
+            "Verify in browser using dev-browser skill"
+          ],
+          "priority": 1,
+          "passes": false,
+          "notes": ""
+        },
+        {
+          "id": "US-010",
+          "title": "Implement auto-refresh functionality",
+          "description": "As a user, I want the board to automatically refresh so I see updates without manually reloading the page.",
+          "acceptanceCriteria": [
+            "Board polls for updates every 30 seconds",
+            "Updates display without full page reload",
+            "No visual flicker during refresh",
+            "Polling interval defined as constant that can be adjusted",
+            "Typecheck passes",
+            "Verify in browser using dev-browser skill"
+          ],
+          "priority": 2,
+          "passes": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "F-005",
+      "name": "List View",
+      "branchName": "ralph/kanban-tracker/list-view",
+      "dependsOn": "F-004",
+      "userStories": [
+        {
+          "id": "US-011",
+          "title": "Create list view with expandable feature sections",
+          "description": "As a user, I want an alternative list view with features as expandable sections so I can see details in a more compact format.",
+          "acceptanceCriteria": [
+            "List view shows features as expandable/collapsible sections",
+            "Each section header shows feature name and progress (X of Y)",
+            "Expanded section shows all stories with ID, title, status, time spent",
+            "Stories are visually distinguished by status (color indicators)",
+            "Sections remember expanded/collapsed state during session",
+            "Typecheck passes",
+            "Verify in browser using dev-browser skill"
+          ],
+          "priority": 1,
+          "passes": false,
+          "notes": ""
+        },
+        {
+          "id": "US-012",
+          "title": "Add view toggle (Board/List)",
+          "description": "As a user, I want to switch between board and list views so I can choose my preferred way to see the data.",
+          "acceptanceCriteria": [
+            "Toggle control visible in page header area",
+            "Toggle switches between Kanban board and list view",
+            "Current view preference persists in local storage",
+            "Smooth transition between views",
+            "Typecheck passes",
+            "Verify in browser using dev-browser skill"
+          ],
+          "priority": 2,
+          "passes": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "F-006",
+      "name": "Theme and Polish",
+      "branchName": "ralph/kanban-tracker/theme-polish",
+      "dependsOn": "F-005",
+      "userStories": [
+        {
+          "id": "US-013",
+          "title": "Implement light/dark mode toggle",
+          "description": "As a user, I want to switch between light and dark themes so I can use the app comfortably in different lighting conditions.",
+          "acceptanceCriteria": [
+            "Theme toggle button in header area",
+            "Dark mode has appropriate color scheme (dark backgrounds #0d1117, light text)",
+            "Light mode has appropriate color scheme (light backgrounds, dark text)",
+            "Theme preference saved to local storage",
+            "Respects system preference on first load",
+            "All components properly themed",
+            "Typecheck passes",
+            "Verify in browser using dev-browser skill"
+          ],
+          "priority": 1,
+          "passes": false,
+          "notes": ""
+        },
+        {
+          "id": "US-014",
+          "title": "Add page header with project info",
+          "description": "As a user, I want to see the project name and overall progress in a header so I have context for what I'm viewing.",
+          "acceptanceCriteria": [
+            "Header shows project name from prd.json",
+            "Header shows overall progress (total stories complete / total stories)",
+            "Header includes view toggle and theme toggle controls",
+            "Header is sticky/fixed on scroll",
+            "Header is responsive on mobile",
+            "Typecheck passes",
+            "Verify in browser using dev-browser skill"
+          ],
+          "priority": 2,
+          "passes": false,
+          "notes": ""
+        },
+        {
+          "id": "US-015",
+          "title": "Make board fully mobile-responsive",
+          "description": "As a user, I want to use the board on my phone so I can check progress anywhere.",
+          "acceptanceCriteria": [
+            "Board columns scroll horizontally on mobile with snap points",
+            "Cards are readable and tappable on small screens",
+            "Header and controls adapt to mobile viewport",
+            "List view works well on mobile",
+            "Touch interactions work smoothly",
+            "Tested at 375px width (iPhone SE)",
+            "Typecheck passes",
+            "Verify in browser using dev-browser skill"
+          ],
+          "priority": 3,
+          "passes": false,
+          "notes": ""
+        }
+      ]
+    }
+  ]
+}
