@@ -75,7 +75,14 @@
           "startedAt": "2026-02-13T17:41:00Z",
           "completedAt": "2026-02-13T17:42:00Z",
           "durationSeconds": 60,
-          "notes": ""
+          "notes": "",
+          "tokenUsage": {
+            "input": 2,
+            "output": 6076,
+            "cacheRead": 899306,
+            "cacheCreate": 25038,
+            "turns": 34
+          }
         }
       ]
     },
@@ -97,8 +104,18 @@
             "Typecheck passes"
           ],
           "priority": 1,
-          "passes": false,
-          "notes": ""
+          "passes": true,
+          "startedAt": "2026-02-13T18:47:00Z",
+          "completedAt": "2026-02-13T18:50:00Z",
+          "durationSeconds": 180,
+          "notes": "",
+          "tokenUsage": {
+            "input": 2,
+            "output": 9634,
+            "cacheRead": 1696041,
+            "cacheCreate": 31754,
+            "turns": 50
+          }
         },
         {
           "id": "US-005",
@@ -113,8 +130,18 @@
             "Verify in browser using dev-browser skill"
           ],
           "priority": 2,
-          "passes": false,
-          "notes": ""
+          "passes": true,
+          "startedAt": "2026-02-13T17:51:19Z",
+          "completedAt": "2026-02-13T17:52:16Z",
+          "durationSeconds": 57,
+          "notes": "",
+          "tokenUsage": {
+            "input": 2,
+            "output": 6133,
+            "cacheRead": 718471,
+            "cacheCreate": 22846,
+            "turns": 31
+          }
         },
         {
           "id": "US-006",
@@ -130,7 +157,10 @@
             "Verify in browser using dev-browser skill"
           ],
           "priority": 3,
-          "passes": false,
+          "passes": true,
+          "startedAt": "2026-02-13T19:30:00Z",
+          "completedAt": "2026-02-13T19:54:00Z",
+          "durationSeconds": 1440,
           "notes": ""
         }
       ]
