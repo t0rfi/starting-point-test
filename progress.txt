@@ -14,6 +14,8 @@
 - KanbanColumn accepts status and stories[] props, renders StoryCard list with header
 - FeatureGroup: groups stories by feature with progress bar, takes (feature, status) props
 - FeatureGroupList: renders all features' stories for a given status column
+- KanbanBoard: main client component at `/` that fetches PRD and renders full board
+- Client components need "use client" directive for React hooks (useState, useEffect)
 
 ---
 
@@ -147,5 +149,40 @@
   - Use FeatureGroupList to render all features in a single column
   - Progress bar uses width percentage via inline style for smooth animation
   - Component returns null when no stories match status (avoids empty containers)
+---
+
+## 2026-02-13T18:09:00Z - US-009
+- Built main Kanban board page as the default route (`/`)
+- Created KanbanBoard client component that fetches from `/api/prd`
+- Board displays three status columns: Backlog, In Progress, Done
+- Uses FeatureGroupList to render features grouped within each column
+- Shows loading state during fetch, EmptyState for missing/error scenarios
+- Stories distributed correctly based on passes field and startedAt
+- Files created:
+  - src/components/KanbanBoard.tsx (main board client component)
+- Files modified:
+  - src/app/page.tsx (now renders KanbanBoard)
+- **Learnings for future iterations:**
+  - Use "use client" directive for components that need useState/useEffect
+  - KanbanBoard combines column rendering with FeatureGroupList for grouped display
+  - getStoryCountByStatus helper calculates story counts across all features
+  - Handle loading, error (fetch-error vs not-found), and empty features states
+---
+
+## 2026-02-13T18:17:00Z - US-010
+- Implemented auto-refresh polling functionality in KanbanBoard component
+- Added POLL_INTERVAL_MS constant (30000ms) for configurable polling interval
+- Refactored fetchPrd to useCallback with isInitial parameter for different behaviors
+- Initial fetch shows loading state and handles errors
+- Polling fetches silently update data without visual flicker (keeps existing data on error)
+- Polling cleans up on unmount via clearInterval
+- Files modified:
+  - src/components/KanbanBoard.tsx (added polling logic)
+- **Learnings for future iterations:**
+  - Use useCallback for fetch functions used in multiple useEffects to avoid recreating
+  - Separate initial vs polling fetch behavior (isInitial parameter) for better UX
+  - On polling errors, keep existing data to avoid flicker
+  - setInterval with cleanup in useEffect for polling patterns
+  - POLL_INTERVAL_MS constant at top of file for easy adjustment
 ---
 
