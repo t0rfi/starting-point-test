@@ -6,6 +6,9 @@
 - Folder structure: src/components, src/lib, src/types
 - PRD types (Feature, UserStory, PRD) exported from src/types/prd.ts
 - API routes go in src/app/api/<endpoint>/route.ts
+- Vitest for unit testing: `npm run test` to run, `npm run test:watch` for watch mode
+- Utility functions go in src/lib/<name>.ts with tests in src/lib/__tests__/<name>.test.ts
+- formatDuration(seconds) utility for human-readable time display (e.g., '2h 15m')
 
 ---
 
@@ -56,5 +59,24 @@
   - Use process.cwd() to get the project root path
   - Check error.code === "ENOENT" for file-not-found errors in Node.js fs operations
   - Import PRD type from @/types/prd for type safety in API responses
+---
+
+## 2026-02-13T18:50:00Z - US-004
+- Created formatDuration utility function for human-readable time formatting
+- Function converts seconds to formats like '2h 15m', '45m', '1h', '0m'
+- Handles edge cases: null/undefined returns '-', 0 or negative returns '0m'
+- Set up Vitest testing framework with React plugin and path aliases
+- Added comprehensive unit tests covering standard cases, edge cases, and large numbers
+- Files created:
+  - src/lib/formatDuration.ts (utility function)
+  - src/lib/__tests__/formatDuration.test.ts (12 unit tests)
+  - vitest.config.ts (Vitest configuration)
+- Files modified:
+  - package.json (added test scripts and vitest dependencies)
+- **Learnings for future iterations:**
+  - Vitest is fast and works well with Next.js projects
+  - Put tests in __tests__ subdirectory next to source files
+  - Use vitest.config.ts for path alias configuration matching tsconfig
+  - formatDuration returns '-' for null/undefined (not empty string) for better UX
 ---
 

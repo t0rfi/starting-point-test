@@ -75,7 +75,14 @@
           "startedAt": "2026-02-13T17:41:00Z",
           "completedAt": "2026-02-13T17:42:00Z",
           "durationSeconds": 60,
-          "notes": ""
+          "notes": "",
+          "tokenUsage": {
+            "input": 2,
+            "output": 6076,
+            "cacheRead": 899306,
+            "cacheCreate": 25038,
+            "turns": 34
+          }
         }
       ]
     },
@@ -97,7 +104,10 @@
             "Typecheck passes"
           ],
           "priority": 1,
-          "passes": false,
+          "passes": true,
+          "startedAt": "2026-02-13T18:47:00Z",
+          "completedAt": "2026-02-13T18:50:00Z",
+          "durationSeconds": 180,
           "notes": ""
         },
         {
