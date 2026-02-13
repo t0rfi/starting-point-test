@@ -9,10 +9,10 @@ interface ViewToggleProps {
 
 export function ViewToggle({ currentView, onViewChange }: ViewToggleProps) {
   return (
-    <div className="inline-flex rounded-lg border border-zinc-200 bg-white p-1 dark:border-zinc-700 dark:bg-zinc-800">
+    <div className="inline-flex touch-manipulation rounded-lg border border-zinc-200 bg-white p-0.5 dark:border-zinc-700 dark:bg-zinc-800 sm:p-1">
       <button
         onClick={() => onViewChange("board")}
-        className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+        className={`flex min-h-[36px] min-w-[36px] items-center justify-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium transition-colors active:scale-95 sm:min-h-0 sm:min-w-0 sm:px-3 sm:active:scale-100 ${
           currentView === "board"
             ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-700 dark:text-zinc-100"
             : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
@@ -36,7 +36,7 @@ export function ViewToggle({ currentView, onViewChange }: ViewToggleProps) {
       </button>
       <button
         onClick={() => onViewChange("list")}
-        className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+        className={`flex min-h-[36px] min-w-[36px] items-center justify-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium transition-colors active:scale-95 sm:min-h-0 sm:min-w-0 sm:px-3 sm:active:scale-100 ${
           currentView === "list"
             ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-700 dark:text-zinc-100"
             : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"

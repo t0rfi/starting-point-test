@@ -6,7 +6,8 @@ import { StoryStatus } from "./StoryCard";
 import { FeatureGroupList } from "./FeatureGroup";
 import { EmptyState } from "./EmptyState";
 import { ListView } from "./ListView";
-import { ViewToggle, ViewMode } from "./ViewToggle";
+import { ViewMode } from "./ViewToggle";
+import { PageHeader } from "./PageHeader";
 
 /** Polling interval in milliseconds - can be adjusted as needed */
 const POLL_INTERVAL_MS = 30000;
@@ -152,26 +153,20 @@ export function Board() {
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900">
-      <div className="p-4 sm:p-6 lg:p-8">
-        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-              {prd.project}
-            </h1>
-            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-              {prd.description}
-            </p>
-          </div>
-          <ViewToggle currentView={viewMode} onViewChange={handleViewChange} />
-        </div>
+      <PageHeader
+        prd={prd}
+        viewMode={viewMode}
+        onViewChange={handleViewChange}
+      />
 
+      <div className="p-4 sm:p-6 lg:p-8">
         <div
           className={`transition-opacity duration-200 ${
             viewMode === "board" ? "opacity-100" : "opacity-0 absolute pointer-events-none"
           }`}
         >
           {viewMode === "board" && (
-            <div className="flex gap-4 overflow-x-auto pb-4 sm:gap-6">
+            <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-4 sm:-mx-0 sm:snap-none sm:gap-6 sm:px-0">
               {STATUSES.map((status) => {
                 const config = columnConfig[status];
                 const storyCount = getStoryCountByStatus(prd, status);
@@ -179,7 +174,7 @@ export function Board() {
                 return (
                   <div
                     key={status}
-                    className="flex min-w-[280px] flex-1 flex-col sm:min-w-[320px]"
+                    className="flex w-[85vw] flex-shrink-0 snap-center flex-col sm:w-auto sm:min-w-[320px] sm:flex-1 sm:snap-align-none"
                   >
                     <div
                       className={`mb-3 rounded-lg px-3 py-2 ${config.headerBg}`}

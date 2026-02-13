@@ -345,7 +345,14 @@
           "startedAt": "2026-02-13T18:30:00Z",
           "completedAt": "2026-02-13T18:35:00Z",
           "durationSeconds": 300,
-          "notes": ""
+          "notes": "",
+          "tokenUsage": {
+            "input": 2,
+            "output": 8854,
+            "cacheRead": 883073,
+            "cacheCreate": 30870,
+            "turns": 32
+          }
         }
       ]
     },
@@ -370,8 +377,18 @@
             "Verify in browser using dev-browser skill"
           ],
           "priority": 1,
-          "passes": false,
-          "notes": ""
+          "passes": true,
+          "startedAt": "2026-02-13T18:23:30Z",
+          "completedAt": "2026-02-13T18:24:49Z",
+          "durationSeconds": 79,
+          "notes": "",
+          "tokenUsage": {
+            "input": 168,
+            "output": 9291,
+            "cacheRead": 1487859,
+            "cacheCreate": 37316,
+            "turns": 46
+          }
         },
         {
           "id": "US-014",
@@ -387,8 +404,18 @@
             "Verify in browser using dev-browser skill"
           ],
           "priority": 2,
-          "passes": false,
-          "notes": ""
+          "passes": true,
+          "startedAt": "2026-02-13T18:26:00Z",
+          "completedAt": "2026-02-13T18:27:30Z",
+          "durationSeconds": 90,
+          "notes": "",
+          "tokenUsage": {
+            "input": 2,
+            "output": 5221,
+            "cacheRead": 721875,
+            "cacheCreate": 25797,
+            "turns": 23
+          }
         },
         {
           "id": "US-015",
@@ -405,7 +432,10 @@
             "Verify in browser using dev-browser skill"
           ],
           "priority": 3,
-          "passes": false,
+          "passes": true,
+          "startedAt": "2026-02-13T18:28:17Z",
+          "completedAt": "2026-02-13T18:31:05Z",
+          "durationSeconds": 168,
           "notes": ""
         }
       ]

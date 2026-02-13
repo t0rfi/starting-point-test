@@ -39,21 +39,21 @@ function StoryRow({ story }: StoryRowProps) {
   const config = statusConfig[status];
 
   return (
-    <div className="flex items-center gap-3 border-b border-zinc-100 px-4 py-3 last:border-b-0 dark:border-zinc-800 sm:gap-4 sm:px-6">
+    <div className="flex min-h-[48px] touch-manipulation items-center gap-3 border-b border-zinc-100 px-4 py-3 last:border-b-0 active:bg-zinc-50 dark:border-zinc-800 dark:active:bg-zinc-700/50 sm:min-h-0 sm:gap-4 sm:px-6 sm:active:bg-transparent">
       <span
-        className={`h-2 w-2 flex-shrink-0 rounded-full ${config.indicator}`}
+        className={`h-2.5 w-2.5 flex-shrink-0 rounded-full sm:h-2 sm:w-2 ${config.indicator}`}
         title={config.label}
       />
-      <span className="w-16 flex-shrink-0 text-xs font-medium text-zinc-500 dark:text-zinc-400 sm:w-20 sm:text-sm">
+      <span className="w-14 flex-shrink-0 text-xs font-medium text-zinc-500 dark:text-zinc-400 sm:w-20 sm:text-sm">
         {story.id}
       </span>
-      <span className="flex-1 truncate text-sm text-zinc-900 dark:text-zinc-100">
+      <span className="min-w-0 flex-1 truncate text-sm text-zinc-900 dark:text-zinc-100">
         {story.title}
       </span>
       <span className={`hidden text-xs sm:inline ${config.textColor}`}>
         {config.label}
       </span>
-      <span className="w-16 flex-shrink-0 text-right text-xs text-zinc-500 dark:text-zinc-400 sm:w-20">
+      <span className="w-12 flex-shrink-0 text-right text-xs text-zinc-500 dark:text-zinc-400 sm:w-20">
         {status === "done" && story.durationSeconds !== undefined
           ? formatDuration(story.durationSeconds)
           : "-"}
@@ -79,7 +79,7 @@ function FeatureSection({ feature, isExpanded, onToggle }: FeatureSectionProps) 
     <div className="overflow-hidden rounded-lg border border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-800/50">
       <button
         onClick={onToggle}
-        className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-700/50 sm:px-6"
+        className="flex min-h-[56px] w-full touch-manipulation items-center gap-3 px-4 py-3 text-left transition-colors active:bg-zinc-100 hover:bg-zinc-50 dark:active:bg-zinc-700 dark:hover:bg-zinc-700/50 sm:min-h-0 sm:px-6 sm:active:bg-zinc-50"
       >
         <svg
           className={`h-4 w-4 flex-shrink-0 text-zinc-500 transition-transform dark:text-zinc-400 ${
