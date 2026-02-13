@@ -10,6 +10,7 @@
 - Utility functions go in src/lib/<name>.ts with tests in src/lib/__tests__/<name>.test.ts
 - formatDuration(seconds) utility for human-readable time display (e.g., '2h 15m')
 - React components go in src/components/<ComponentName>.tsx
+- Story status: getStoryStatus(story) from StoryCard.tsx returns 'backlog' | 'in-progress' | 'done'
 
 ---
 
@@ -94,5 +95,22 @@
   - Use zinc color palette for neutral UI elements
   - Support dark mode with dark: variants in Tailwind classes
   - EmptyState accepts optional title and message props for flexibility
+---
+
+## 2026-02-13T19:54:00Z - US-006
+- Created StoryCard component for displaying user story information
+- Card displays story ID prominently in header with status indicator dot
+- Card shows title (prominent) and description (truncated with line-clamp-2)
+- Time spent shown in human-readable format for completed stories using formatDuration utility
+- Status-based color coding: gray for backlog, blue for in-progress, green for done
+- Responsive design with sm: breakpoints for padding and text sizing
+- Exported getStoryStatus helper function to determine story status from passes/startedAt fields
+- Files created:
+  - src/components/StoryCard.tsx (story card UI component)
+- **Learnings for future iterations:**
+  - Story status logic: passes=true → done, passes=false && startedAt → in-progress, otherwise → backlog
+  - Use line-clamp-N Tailwind classes for text truncation
+  - Export StoryStatus type and getStoryStatus helper for reuse by other components (e.g., Kanban columns)
+  - Use transition-colors for subtle hover/focus effects
 ---
 
