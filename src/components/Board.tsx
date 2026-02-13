@@ -7,6 +7,7 @@ import { FeatureGroupList } from "./FeatureGroup";
 import { EmptyState } from "./EmptyState";
 import { ListView } from "./ListView";
 import { ViewToggle, ViewMode } from "./ViewToggle";
+import { ThemeToggle } from "./ThemeToggle";
 
 /** Polling interval in milliseconds - can be adjusted as needed */
 const POLL_INTERVAL_MS = 30000;
@@ -162,7 +163,10 @@ export function Board() {
               {prd.description}
             </p>
           </div>
-          <ViewToggle currentView={viewMode} onViewChange={handleViewChange} />
+          <div className="flex items-center gap-2">
+            <ViewToggle currentView={viewMode} onViewChange={handleViewChange} />
+            <ThemeToggle />
+          </div>
         </div>
 
         <div
