@@ -19,6 +19,8 @@
 - Tailwind CSS v4 dark mode: use @custom-variant dark (&:where(.dark, .dark *)) in globals.css
 - Theme toggle: apply 'dark' class to document.documentElement for class-based dark mode
 - Local storage keys: 'kanban-tracker-view' for view mode, 'kanban-tracker-theme' for theme
+- Mobile responsiveness: use snap-x snap-mandatory for horizontal scroll, 85vw columns
+- Touch targets: min-h-[36px] min-w-[36px], touch-manipulation, active:scale-95 feedback
 
 ---
 
@@ -262,5 +264,31 @@
   - backdrop-blur-sm with semi-transparent bg gives modern glass effect
   - getOverallProgress helper calculates story completion across all features
   - PageHeader accepts prd, viewMode, and onViewChange props
+---
+
+## 2026-02-13T18:31:05Z - US-015
+- Made board fully mobile-responsive with horizontal snap scroll
+- Added snap-x snap-mandatory for column scrolling on mobile (< sm breakpoint)
+- Set column width to 85vw on mobile with flex-shrink-0 and snap-center
+- Improved touch targets with min-h-[36px] min-w-[36px] for buttons (44px recommended)
+- Added touch-manipulation CSS for faster touch response
+- Added active:scale-95 visual feedback for touch interactions
+- Optimized PageHeader: condensed progress text, single-row layout on mobile
+- Improved StoryCard: min-height, larger status indicators, better line-height
+- Enhanced ListView: min-height rows, touch feedback on tap
+- Files modified:
+  - src/components/Board.tsx (snap scroll for mobile columns)
+  - src/components/StoryCard.tsx (touch targets, spacing)
+  - src/components/PageHeader.tsx (mobile layout optimization)
+  - src/components/ViewToggle.tsx (touch targets)
+  - src/components/ThemeToggle.tsx (touch targets)
+  - src/components/ListView.tsx (row heights, touch feedback)
+- **Learnings for future iterations:**
+  - Use snap-x snap-mandatory for horizontal carousel scrolling on mobile
+  - 85vw column width with snap-center creates a nice peek of adjacent columns
+  - touch-manipulation CSS property prevents 300ms touch delay
+  - Use active:scale-95 on mobile, reset to scale-100 on sm: breakpoint
+  - min-h-[36px] or min-h-[44px] ensures touch targets meet accessibility guidelines
+  - Use -mx-4 px-4 pattern to extend scroll area edge-to-edge on mobile
 ---
 
