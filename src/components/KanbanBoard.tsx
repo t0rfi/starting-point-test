@@ -1,10 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { PRD } from "@/types/prd";
 import { StoryStatus } from "./StoryCard";
 import { FeatureGroupList } from "./FeatureGroup";
 import { EmptyState } from "./EmptyState";
+
+/** Polling interval in milliseconds - can be adjusted as needed */
+const POLL_INTERVAL_MS = 30000;
 
 const STATUSES: StoryStatus[] = ["backlog", "in-progress", "done"];
 
@@ -54,29 +57,46 @@ export function KanbanBoard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function fetchPrd() {
-      try {
-        const response = await fetch("/api/prd");
-        if (!response.ok) {
-          if (response.status === 404) {
-            setError("not-found");
-          } else {
-            setError("fetch-error");
-          }
-          return;
+  const fetchPrd = useCallback(async (isInitial: boolean = false) => {
+    try {
+      const response = await fetch("/api/prd");
+      if (!response.ok) {
+        if (response.status === 404) {
+          setError("not-found");
+        } else {
+          setError("fetch-error");
         }
-        const data: PRD = await response.json();
-        setPrd(data);
-      } catch {
+        return;
+      }
+      const data: PRD = await response.json();
+      setPrd(data);
+      // Clear any previous error on successful fetch
+      setError(null);
+    } catch {
+      // Only set error on initial load; on subsequent polls, keep existing data
+      if (isInitial) {
         setError("fetch-error");
-      } finally {
+      }
+    } finally {
+      if (isInitial) {
         setLoading(false);
       }
     }
-
-    fetchPrd();
   }, []);
+
+  // Initial fetch
+  useEffect(() => {
+    fetchPrd(true);
+  }, [fetchPrd]);
+
+  // Polling for updates
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      fetchPrd(false);
+    }, POLL_INTERVAL_MS);
+
+    return () => clearInterval(intervalId);
+  }, [fetchPrd]);
 
   if (loading) {
     return (

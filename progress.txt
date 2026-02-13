@@ -169,3 +169,20 @@
   - Handle loading, error (fetch-error vs not-found), and empty features states
 ---
 
+## 2026-02-13T18:17:00Z - US-010
+- Implemented auto-refresh polling functionality in KanbanBoard component
+- Added POLL_INTERVAL_MS constant (30000ms) for configurable polling interval
+- Refactored fetchPrd to useCallback with isInitial parameter for different behaviors
+- Initial fetch shows loading state and handles errors
+- Polling fetches silently update data without visual flicker (keeps existing data on error)
+- Polling cleans up on unmount via clearInterval
+- Files modified:
+  - src/components/KanbanBoard.tsx (added polling logic)
+- **Learnings for future iterations:**
+  - Use useCallback for fetch functions used in multiple useEffects to avoid recreating
+  - Separate initial vs polling fetch behavior (isInitial parameter) for better UX
+  - On polling errors, keep existing data to avoid flicker
+  - setInterval with cleanup in useEffect for polling patterns
+  - POLL_INTERVAL_MS constant at top of file for easy adjustment
+---
+
